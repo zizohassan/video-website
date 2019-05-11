@@ -23,6 +23,7 @@ Visitors
    -	Can view skills
    -	Can view user profile
    -	Can send message in Contact us
+   
 Users
    -	Can add comments
    -	Can edit profile
