@@ -24,8 +24,8 @@ Visitors
    -	Can view user profile
    -	Can send message in Contact us
 Users
-        -	Can add comments
-        -	Can edit profile
+   -	Can add comments
+   -	Can edit profile
 
 # Technologies
   -	Laravel 5.8
