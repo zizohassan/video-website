@@ -13,17 +13,17 @@ Video , category , skills , tags  , comments ,search , pages , contact us (dashb
 -	Statistics videos/comments/category/skills/tags
 
 # Website
-     Visitors
-        -	Can view video
-        -	Can view category
-        -	Can view pages
-        -	Can view comments
-        -	Can search by name 
-        -	Can search by tags
-        -	Can view skills
-        -	Can view user profile
-        -	Can send message in Contact us
-     Users
+Visitors
+   -	Can view video
+   -	Can view category
+   -	Can view pages
+   -	Can view comments
+   -	Can search by name 
+   -	Can search by tags
+   -	Can view skills
+   -	Can view user profile
+   -	Can send message in Contact us
+Users
         -	Can add comments
         -	Can edit profile
 
