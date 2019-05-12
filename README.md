@@ -15,8 +15,10 @@ Video , category , skills , tags  , comments ,search , pages , contact us (dashb
 
 then login with
 
-email : admin@website.com
-password : 123456
+```
+   email : admin@website.com
+   password : 123456
+```
 
 # Admin 
 -	Add / edit /delete category
