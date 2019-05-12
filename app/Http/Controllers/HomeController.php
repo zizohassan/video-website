@@ -35,7 +35,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $videos = Video::orderBy('id' , 'desc');
+        $videos = Video::published()->orderBy('id' , 'desc');
         if(request()->has('search') && request()->get('search') != ''){
             $videos = $videos->where('name' , 'like' , "%".request()->get('search')."%");
         }
@@ -45,18 +45,18 @@ class HomeController extends Controller
 
     public function category($id){
         $cat = Category::findOrFail($id);
-        $videos = Video::where('cat_id' , $id)->orderBy('id' , 'desc')->paginate(30);
+        $videos = Video::published()->where('cat_id' , $id)->orderBy('id' , 'desc')->paginate(30);
         return view('front-end.category.index' , compact('videos' , 'cat'));
     }
 
     public function video($id){
-        $video = Video::with('skills' , 'tags' , 'cat' , 'user' , 'comments.user')->findOrFail($id);
+        $video = Video::published()->with('skills' , 'tags' , 'cat' , 'user' , 'comments.user')->findOrFail($id);
         return view('front-end.video.index' , compact('video'));
     }
 
     public function skills($id){
         $skill = Skill::findOrFail($id);
-        $videos = Video::whereHas('skills' , function ($query) use ($id){
+        $videos = Video::published()->whereHas('skills' , function ($query) use ($id){
             $query->where('skill_id' , $id);
         })->orderBy('id' , 'desc')->paginate(30);
         return view('front-end.skill.index' , compact('videos' , 'skill'));
@@ -64,7 +64,7 @@ class HomeController extends Controller
 
     public function tags($id){
         $tag = Tag::findOrFail($id);
-        $videos = Video::whereHas('tags' , function ($query) use ($id){
+        $videos = Video::published()->whereHas('tags' , function ($query) use ($id){
             $query->where('tag_id' , $id);
         })->orderBy('id' , 'desc')->paginate(30);
         return view('front-end.tag.index' , compact('videos' , 'tag'));
@@ -74,28 +74,32 @@ class HomeController extends Controller
         $comment = Comments::findOrFail($id);
         if(($comment->user_id == auth()->user()->id) || auth()->user()->group == 'admin'){
             $comment->update(['comment' => $request->comment]);
+            alert()->success('Your Comment Has Been Updated' , 'Done');
         }
+        alert()->error('we did not found this comment' , 'Done');
         return redirect()->route('frontend.video' , ['id' => $comment->video_id , '#commnets']);
     }
 
     public function commentStore($id , Store $request){
-        $video = Video::findOrFail($id);
+        $video = Video::published()->findOrFail($id);
         Comments::create([
             'user_id' => auth()->user()->id,
             'video_id' => $video->id,
             'comment' => $request->comment
         ]);
+        alert()->success('Your Comment Has Been Added' , 'Done');
         return redirect()->route('frontend.video' , ['id' => $video->id , '#commnets']);
     }
 
     public function messageStore(\App\Http\Requests\FrontEnd\Messages\Store $request){
         Message::create($request->all());
+        alert()->success('You message have been saved , we will call you n 24 hour' , 'Done');
         return redirect()->route('frontend.landing');
     }
 
     public function welcome(){
-        $videos = Video::orderBy('id' , 'desc')->paginate(9);
-        $videos_count = Video::count();
+        $videos = Video::published()->orderBy('id' , 'desc')->paginate(9);
+        $videos_count = Video::published()->count();
         $comments_count = Comments::count();
         $tags_count = Tag::count();
         return view('welcome' , compact('videos' , 'tags_count' , 'comments_count' , 'videos_count'));
@@ -129,6 +133,7 @@ class HomeController extends Controller
         if(!empty($array)){
             $user->update($array);
         }
+        alert()->success('Your Profile Has Been Updated' , 'Done');
         return redirect()->route('front.profile' , ['id' => $user->id , 'slug' =>slug($user->name)]);
     }
 

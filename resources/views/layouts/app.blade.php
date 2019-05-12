@@ -6,6 +6,8 @@
     <link rel="apple-touch-icon" sizes="76x76" href="/frontend/img//apple-icon.png">
     <link rel="icon" type="image/png" href="/frontend/img//favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="description" content="@yield('meta_des')')">
+    <meta name="keywords" content="@yield('meta_keywords')>
     <title>5dmat-web | @yield('title')</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
           name='viewport'/>
@@ -67,6 +69,8 @@
             }
         });
     </script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    @include('sweet::alert')
 </body>
 
 </html>

@@ -2,6 +2,10 @@
 
 @section('title' , $cat->name)
 
+@section('meta_keywords' , $cat->meta_keywords)
+
+@section('meta_des' , $cat->meta_des)
+
 @section('content')
     <div class="section section-buttons">
         <div class="container">
