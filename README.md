@@ -5,6 +5,19 @@
 # video-website
 Video , category , skills , tags  , comments ,search , pages , contact us (dashboard , website)
 
+# Install
+
+```
+   composer install
+   php artisan migrate
+   php artisan db:seed
+```
+
+then login with
+
+email : admin@website.com
+password : 123456
+
 # Admin 
 -	Add / edit /delete category
 -	Add/edit/delete skills
