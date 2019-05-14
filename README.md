@@ -7,11 +7,29 @@ Video , category , skills , tags  , comments ,search , pages , contact us (dashb
 
 # Install
 
+ go to this path
+
+```
+app/Providers/AppServiceProvider.php
+```
+
+then comment this lines
+
+```
+view()->share('categories' , Category::get());
+view()->share('skills' , Skill::get());
+view()->share('pages' , Page::get());
+```
+
+then
+
 ```
    composer install
    php artisan migrate
    php artisan db:seed
 ```
+
+now remove comment the lines on `AppServiceProvider.php` file
 
 then login with
 
